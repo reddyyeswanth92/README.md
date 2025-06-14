@@ -1,2 +1,2 @@
 # Hello 👋 I'm Yeswanth Reddy
-🔧 Full-Stack Developer | MEAN Stack | Real-Time Chat App Builder
+🔧 Full-Stack Developer | MEAN Stack | JS
