@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>StrykeX — AI Based Algo Trading Platform</title>
+    <meta name="description" content="Welcome to the future of trading. Automate strategies on autopilot with StrykeX — an AI based algo trading platform." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --bg-900: #0b1220;
+        --bg-800: #0e1626;
+        --bg-700: #101a2e;
+        --brand-500: #4f7cff;
+        --brand-400: #7ea2ff;
+        --brand-300: #a7beff;
+        --accent-500: #28d7ff;
+        --text-100: #f8fbff;
+        --text-300: #c7d2e5;
+        --text-400: #a6b2c8;
+        --surface-800: #0e1524;
+        --surface-700: #111a2f;
+        --muted-600: #202c44;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Reset */
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        color: var(--text-100);
+        background: radial-gradient(1200px 600px at 10% 0%, #183058 0%, rgba(24, 48, 88, 0) 60%),
+          radial-gradient(1200px 600px at 90% 0%, #13264a 0%, rgba(19, 38, 74, 0) 60%),
+          linear-gradient(180deg, var(--bg-900) 0%, var(--bg-800) 60%, var(--bg-700) 100%);
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Subtle grid overlay */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 80px 80px, 80px 80px;
+        mask-image: radial-gradient(closest-side, rgba(0,0,0,0.7), rgba(0,0,0,0));
+      }
+
+      .container {
+        width: min(1200px, 92%);
+        margin: 0 auto;
+      }
+
+      /* Navigation */
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: saturate(120%) blur(10px);
+        background: rgba(11, 18, 32, 0.6);
+        border-bottom: 1px solid rgba(168, 184, 216, 0.08);
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 18px 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: 0.2px;
+        font-size: 22px;
+        text-decoration: none;
+        color: var(--text-100);
+      }
+      .brand-x {
+        display: inline-grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, var(--brand-500), var(--accent-500));
+        color: #0b1220;
+        font-weight: 900;
+      }
+
+      .nav-links {
+        display: none;
+        gap: 26px;
+      }
+      .nav-links a {
+        color: var(--text-300);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .nav-links a:hover { color: var(--text-100); }
+
+      .nav-cta { display: none; align-items: center; gap: 12px; }
+
+      .btn {
+        appearance: none;
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 16px;
+        font-weight: 600;
+        color: var(--text-100);
+        background: var(--surface-700);
+        box-shadow: inset 0 0 0 1px rgba(168, 184, 216, 0.15);
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .btn:hover { filter: brightness(1.07); }
+      .btn-primary {
+        background: linear-gradient(135deg, var(--brand-500), var(--accent-500));
+        color: #0b1220;
+        box-shadow: 0 8px 20px rgba(79, 124, 255, 0.35);
+      }
+      .btn-ghost {
+        background: transparent;
+        box-shadow: inset 0 0 0 1px rgba(168, 184, 216, 0.18);
+      }
+
+      /* Hero */
+      .hero {
+        padding: 72px 0 32px;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(79, 124, 255, 0.1);
+        box-shadow: inset 0 0 0 1px rgba(79, 124, 255, 0.35);
+        color: var(--text-300);
+        font-weight: 600;
+        margin-bottom: 22px;
+      }
+      .badge .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--brand-500), var(--accent-500));
+        box-shadow: 0 0 8px rgba(40, 215, 255, 0.8);
+      }
+
+      .hero h1 {
+        font-weight: 800;
+        font-size: clamp(36px, 6vw, 64px);
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+        margin: 0 0 12px 0;
+      }
+      .text-gradient {
+        background: linear-gradient(90deg, var(--accent-500), var(--brand-400));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .hero p {
+        margin: 14px 0 26px;
+        color: var(--text-400);
+        font-size: clamp(16px, 2.2vw, 20px);
+        max-width: 900px;
+      }
+
+      .hero-cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 4px;
+      }
+
+      /* Showcase card */
+      .showcase {
+        position: relative;
+        margin-top: 48px;
+        border-radius: 20px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        border: 1px solid rgba(168, 184, 216, 0.1);
+      }
+      .showcase::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(1000px 400px at 30% -10%, rgba(79,124,255,0.22), transparent 40%),
+          radial-gradient(700px 300px at 80% 0%, rgba(40,215,255,0.18), transparent 45%);
+        pointer-events: none;
+      }
+      .showcase-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 18px;
+        background: rgba(14, 21, 36, 0.9);
+        border-bottom: 1px solid rgba(168, 184, 216, 0.08);
+      }
+      .showcase-title { font-weight: 700; color: var(--text-300); }
+      .showcase-actions { display: flex; gap: 8px; }
+
+      .showcase-body {
+        padding: 18px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .panel {
+        background: rgba(12, 20, 36, 0.8);
+        border: 1px solid rgba(168, 184, 216, 0.1);
+        border-radius: 14px;
+        padding: 16px;
+        min-height: 180px;
+      }
+      .panel h3 { margin: 0 0 10px 0; font-size: 15px; color: var(--text-300); }
+      .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      .kpi {
+        padding: 12px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(168, 184, 216, 0.08);
+      }
+      .kpi .label { color: var(--text-400); font-size: 12px; }
+      .kpi .value { font-weight: 800; font-size: 18px; margin-top: 2px; }
+
+      /* Footer */
+      footer {
+        padding: 60px 0 40px;
+        color: var(--text-400);
+      }
+
+      /* Responsive */
+      @media (min-width: 860px) {
+        .nav-links { display: flex; }
+        .nav-cta { display: flex; }
+      }
+      @media (max-width: 859px) {
+        .showcase-body { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <header class="nav">
+      <div class="container nav-inner">
+        <a class="brand" href="#">
+          <span>Stryke</span>
+          <span class="brand-x">X</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#">Home</a>
+          <a href="#features">Features</a>
+          <a href="#algos">Algos</a>
+          <a href="#pricing">Pricing</a>
+        </nav>
+
+        <div class="nav-cta">
+          <a class="btn btn-ghost" href="#login">Login / Sign Up</a>
+          <a class="btn btn-primary" href="#tutorial">Watch Tutorial ▸</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <div class="badge"><span class="dot"></span> StrykeX · AI Based Algo Trading Platform</div>
+        <h1>
+          Welcome To The Future Of Trading<br />
+          <span class="text-gradient">Automate</span> Strategies On Autopilot
+        </h1>
+        <p>
+          Unleash the power of fully automatic systematic trading, and change your trading game forever.
+          Deploy, monitor, and iterate on AI-driven strategies with confidence.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#get-started">Deploy Strategy in Live</a>
+          <a class="btn" href="#details">View Strategy Details</a>
+          <a class="btn btn-ghost" href="#edit">Copy &amp; Edit</a>
+        </div>
+
+        <!-- Showcase -->
+        <div class="showcase" role="region" aria-label="Strategy Preview">
+          <div class="showcase-header">
+            <div class="showcase-title">Bullish Momentum Algo Strategy</div>
+            <div class="showcase-actions">
+              <button class="btn btn-ghost" aria-label="privacy">Private</button>
+              <button class="btn btn-ghost" aria-label="share">Public</button>
+            </div>
+          </div>
+          <div class="showcase-body">
+            <div class="panel">
+              <h3>KPIs</h3>
+              <div class="kpis">
+                <div class="kpi">
+                  <div class="label">Profit</div>
+                  <div class="value">+18.4%</div>
+                </div>
+                <div class="kpi">
+                  <div class="label">Win Rate</div>
+                  <div class="value">61%</div>
+                </div>
+                <div class="kpi">
+                  <div class="label">Max Drawdown</div>
+                  <div class="value">-7.8%</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <h3>Run Settings</h3>
+              <div class="kpis">
+                <div class="kpi">
+                  <div class="label">Run Type</div>
+                  <div class="value">Live</div>
+                </div>
+                <div class="kpi">
+                  <div class="label">Risk</div>
+                  <div class="value">Medium</div>
+                </div>
+                <div class="kpi">
+                  <div class="label">Status</div>
+                  <div class="value">Running</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        © <span id="year"></span> StrykeX. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      // Update year automatically
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+  </html>
+
